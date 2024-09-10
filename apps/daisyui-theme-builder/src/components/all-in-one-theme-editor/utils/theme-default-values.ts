@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 
-import { useNavigate, useSearch } from "@tanstack/react-router";
+import {  useSearch } from "@tanstack/react-router";
 import type { DaisyUIThemeSearchParmsTypesVariables, GenericThemeState } from "./types";
 import { useState } from "react";
 import {
@@ -324,27 +324,14 @@ export function importThemes(imported_text: string) {
   return imported_theme;
 }
 
-export function useUpdateTheme() {
-  const navigate = useNavigate();
-  const searchParams = useSearch({
-    from: "/",
-  });
-  const updateTheme = (newTheme: Record<string, GenericThemeState>) => {
-    navigate({
-      search: {
-        ...searchParams,
-        ...newTheme,
-      },
-    });
-  };
-  return { updateTheme };
-}
 
-export function useThemeWithDefaults() {
-  const themeSearchParams = useSearch({
-    from: "__root__",
-  });
-  const [themes] = useState(defaultThemes({ theme: themeSearchParams }));
 
-  return themes;
-}
+
+// export function useThemeWithDefaults() {
+//   const themeSearchParams = useSearch({
+//     from: "__root__",
+//   });
+//   const [themes] = useState(defaultThemes({ theme: themeSearchParams }));
+
+//   return themes;
+// }
