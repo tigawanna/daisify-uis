@@ -93,59 +93,13 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
-export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/shadcn/charts': typeof ShadcnChartsLazyRoute
-  '/shadcn': typeof ShadcnIndexLazyRoute
-  '/twarkui': typeof TwarkuiIndexLazyRoute
-}
-
-export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/shadcn/charts': typeof ShadcnChartsLazyRoute
-  '/shadcn': typeof ShadcnIndexLazyRoute
-  '/twarkui': typeof TwarkuiIndexLazyRoute
-}
-
-export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/shadcn/charts': typeof ShadcnChartsLazyRoute
-  '/shadcn/': typeof ShadcnIndexLazyRoute
-  '/twarkui/': typeof TwarkuiIndexLazyRoute
-}
-
-export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/shadcn/charts' | '/shadcn' | '/twarkui'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/shadcn/charts' | '/shadcn' | '/twarkui'
-  id: '__root__' | '/' | '/about' | '/shadcn/charts' | '/shadcn/' | '/twarkui/'
-  fileRoutesById: FileRoutesById
-}
-
-export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
-  ShadcnChartsLazyRoute: typeof ShadcnChartsLazyRoute
-  ShadcnIndexLazyRoute: typeof ShadcnIndexLazyRoute
-  TwarkuiIndexLazyRoute: typeof TwarkuiIndexLazyRoute
-}
-
-const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
-  ShadcnChartsLazyRoute: ShadcnChartsLazyRoute,
-  ShadcnIndexLazyRoute: ShadcnIndexLazyRoute,
-  TwarkuiIndexLazyRoute: TwarkuiIndexLazyRoute,
-}
-
-export const routeTree = rootRoute
-  ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+export const routeTree = rootRoute.addChildren({
+  IndexRoute,
+  AboutRoute,
+  ShadcnChartsLazyRoute,
+  ShadcnIndexLazyRoute,
+  TwarkuiIndexLazyRoute,
+})
 
 /* prettier-ignore-end */
 

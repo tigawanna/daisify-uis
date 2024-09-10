@@ -43,7 +43,6 @@ function RootComponent() {
     themeChange(false);
     // 👆 false parameter is required for react project
     navigate({
-            // @ts-expect-error
       search: defaultThemes({ theme: searchParams }),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -53,7 +52,6 @@ function RootComponent() {
       theme: { ...searchParams },
     });
     navigate({
-      // @ts-expect-error
       search: default_data_theme,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -118,7 +116,6 @@ function RootComponent() {
       {/* Page content here */}
       <MainDaisyUiDrawer
         closeDrawer={closeDrawer}
-        searchParams={searchParams}
       />
       {/* export theme drawer */}
       <ExportThemeDaisyUiDrawer searchParams={searchParams} />

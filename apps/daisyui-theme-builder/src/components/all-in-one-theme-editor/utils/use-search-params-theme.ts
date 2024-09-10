@@ -8,7 +8,6 @@ export function useDaisyUITheme() {
   const navigate = useNavigate();
   function updateTheme(items_key: string, new_items: string) {
     navigate({
-      // @ts-expect-error
       search: (prev) => {
         return {
           ...prev,
@@ -22,7 +21,6 @@ export function useDaisyUITheme() {
   }
   function updateWholeTheme(theme: Record<string, any>) {
     navigate({
-            // @ts-expect-error
       search: (prev) => {
         return {
           ...prev,
@@ -33,7 +31,6 @@ export function useDaisyUITheme() {
   }
   function updateThemeName(theme_name: string) {
     navigate({
-            // @ts-expect-error
       search: (prev) => {
         return {
           ...prev,
@@ -49,8 +46,7 @@ export function useDaisyUITheme() {
   }
   function updateLockedTheme(items_key: string, is_locked: boolean) {
     navigate({
-      // @ts-expect-error
-      search: (prev,) => {
+      search: (prev) => {
         return {
           ...prev,
           [items_key]: {

@@ -2,8 +2,7 @@
 import { useCallback, useMemo } from "react";
 import { GenericColorCard, GenericThemeCurveCard } from "./GenericThemeCard";
 import { DaisyUIThemeSearchParmsTypes } from "./utils/schema";
-import { useDaisyUITheme } from "./utils/use-search-params-theme";
-import { createDaisyUiContext } from "./state/daisyui-context";
+
 
 export default function DaisyUIThemeEditor({
   theme,

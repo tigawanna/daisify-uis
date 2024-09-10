@@ -1,7 +1,7 @@
 import { useState } from "react";
 import DaisyUIThemeEditor from "../all-in-one-theme-editor/DaisyUIThemeEditor";
-import { defaultThemes } from "../all-in-one-theme-editor/utils/theme-default-values";
 import { twMerge } from "tailwind-merge";
+import { defaultThemes } from "../all-in-one-theme-editor/utils/theme-default-values";
 import { useDaisyUITheme } from "../all-in-one-theme-editor/utils/use-search-params-theme";
 
 
@@ -20,9 +20,8 @@ export function DaisyUiDevtools({
   drawerClassname="",
   iconClassname="",
 }: DaisyUiDevtoolsProps) {
-  const [searchParams] = useState(defaultThemes({})); 
-    const { updateTheme, updateLockedTheme } = useDaisyUITheme();
 
+  const {searchParams,updateLockedTheme,updateTheme} = useDaisyUITheme() 
   if(process.env.NODE_ENV !== "development"){
     return
  }
