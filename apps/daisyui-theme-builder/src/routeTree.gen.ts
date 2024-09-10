@@ -20,7 +20,6 @@ import { Route as IndexImport } from './routes/index'
 
 const TwarkuiIndexLazyImport = createFileRoute('/twarkui/')()
 const ShadcnIndexLazyImport = createFileRoute('/shadcn/')()
-const ShadcnChartsLazyImport = createFileRoute('/shadcn/charts')()
 
 // Create/Update Routes
 
@@ -44,11 +43,6 @@ const ShadcnIndexLazyRoute = ShadcnIndexLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/shadcn/index.lazy').then((d) => d.Route))
 
-const ShadcnChartsLazyRoute = ShadcnChartsLazyImport.update({
-  path: '/shadcn/charts',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/shadcn/charts.lazy').then((d) => d.Route))
-
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -65,13 +59,6 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutImport
-      parentRoute: typeof rootRoute
-    }
-    '/shadcn/charts': {
-      id: '/shadcn/charts'
-      path: '/shadcn/charts'
-      fullPath: '/shadcn/charts'
-      preLoaderRoute: typeof ShadcnChartsLazyImport
       parentRoute: typeof rootRoute
     }
     '/shadcn/': {
@@ -93,13 +80,54 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren({
-  IndexRoute,
-  AboutRoute,
-  ShadcnChartsLazyRoute,
-  ShadcnIndexLazyRoute,
-  TwarkuiIndexLazyRoute,
-})
+export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/shadcn': typeof ShadcnIndexLazyRoute
+  '/twarkui': typeof TwarkuiIndexLazyRoute
+}
+
+export interface FileRoutesByTo {
+  '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/shadcn': typeof ShadcnIndexLazyRoute
+  '/twarkui': typeof TwarkuiIndexLazyRoute
+}
+
+export interface FileRoutesById {
+  __root__: typeof rootRoute
+  '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/shadcn/': typeof ShadcnIndexLazyRoute
+  '/twarkui/': typeof TwarkuiIndexLazyRoute
+}
+
+export interface FileRouteTypes {
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths: '/' | '/about' | '/shadcn' | '/twarkui'
+  fileRoutesByTo: FileRoutesByTo
+  to: '/' | '/about' | '/shadcn' | '/twarkui'
+  id: '__root__' | '/' | '/about' | '/shadcn/' | '/twarkui/'
+  fileRoutesById: FileRoutesById
+}
+
+export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  ShadcnIndexLazyRoute: typeof ShadcnIndexLazyRoute
+  TwarkuiIndexLazyRoute: typeof TwarkuiIndexLazyRoute
+}
+
+const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  ShadcnIndexLazyRoute: ShadcnIndexLazyRoute,
+  TwarkuiIndexLazyRoute: TwarkuiIndexLazyRoute,
+}
+
+export const routeTree = rootRoute
+  ._addFileChildren(rootRouteChildren)
+  ._addFileTypes<FileRouteTypes>()
 
 /* prettier-ignore-end */
 
@@ -111,7 +139,6 @@ export const routeTree = rootRoute.addChildren({
       "children": [
         "/",
         "/about",
-        "/shadcn/charts",
         "/shadcn/",
         "/twarkui/"
       ]
@@ -121,9 +148,6 @@ export const routeTree = rootRoute.addChildren({
     },
     "/about": {
       "filePath": "about.tsx"
-    },
-    "/shadcn/charts": {
-      "filePath": "shadcn/charts.lazy.tsx"
     },
     "/shadcn/": {
       "filePath": "shadcn/index.lazy.tsx"

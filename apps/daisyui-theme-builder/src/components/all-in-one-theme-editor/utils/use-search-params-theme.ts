@@ -1,13 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useNavigate, useSearch } from "@tanstack/react-router";
+import { useNavigate, useSearch,useLocation } from "@tanstack/react-router";
 
 export function useDaisyUITheme() {
+  const {pathname} = useLocation()
+
   const searchParams = useSearch({
     from: "__root__",
   });
   const navigate = useNavigate();
   function updateTheme(items_key: string, new_items: string) {
+    
     navigate({
+      to : pathname,
       search: (prev) => {
         return {
           ...prev,
@@ -21,6 +25,7 @@ export function useDaisyUITheme() {
   }
   function updateWholeTheme(theme: Record<string, any>) {
     navigate({
+      to: pathname,
       search: (prev) => {
         return {
           ...prev,
@@ -31,6 +36,7 @@ export function useDaisyUITheme() {
   }
   function updateThemeName(theme_name: string) {
     navigate({
+      to: pathname,
       search: (prev) => {
         return {
           ...prev,
@@ -46,6 +52,7 @@ export function useDaisyUITheme() {
   }
   function updateLockedTheme(items_key: string, is_locked: boolean) {
     navigate({
+      to: pathname,
       search: (prev) => {
         return {
           ...prev,

@@ -2,6 +2,7 @@ import {
   createRootRouteWithContext,
   Link,
   Outlet,
+  useLocation,
   useRouterState,
 } from "@tanstack/react-router";
 import type { RouterCntextTypes } from "@/main";
@@ -37,12 +38,13 @@ export const Route = createRootRouteWithContext<RouterCntextTypes>()({
 function RootComponent() {
   const { searchParams, updateWholeTheme, navigate } = useDaisyUITheme();
   const { status } = useRouterState();
-
+  const { pathname } = useLocation();
   useEffect(() => {
     hideSplashScreen();
     themeChange(false);
     // 👆 false parameter is required for react project
     navigate({
+      to: pathname,
       search: defaultThemes({ theme: searchParams }),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -52,6 +54,7 @@ function RootComponent() {
       theme: { ...searchParams },
     });
     navigate({
+      to: pathname,
       search: default_data_theme,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
