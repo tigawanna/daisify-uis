@@ -2,6 +2,7 @@ import { useState } from "react";
 import DaisyUIThemeEditor from "../all-in-one-theme-editor/DaisyUIThemeEditor";
 import { defaultThemes } from "../all-in-one-theme-editor/utils/theme-default-values";
 import { twMerge } from "tailwind-merge";
+import { useDaisyUITheme } from "../all-in-one-theme-editor/utils/use-search-params-theme";
 
 
 interface DaisyUiDevtoolsProps {
@@ -20,6 +21,7 @@ export function DaisyUiDevtools({
   iconClassname="",
 }: DaisyUiDevtoolsProps) {
   const [searchParams] = useState(defaultThemes({})); 
+    const { updateTheme, updateLockedTheme } = useDaisyUITheme();
 
   if(process.env.NODE_ENV !== "development"){
     return
@@ -76,7 +78,7 @@ export function DaisyUiDevtools({
             </label>
             {/* Sidebar content here */}
 
-            <DaisyUIThemeEditor theme={searchParams} />
+            <DaisyUIThemeEditor theme={searchParams} updateTheme={updateTheme} updateLockedTheme={updateLockedTheme}/>
           </ul>
         </div>
       </div>
