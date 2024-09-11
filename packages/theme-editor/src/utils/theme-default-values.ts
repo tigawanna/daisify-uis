@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 
-import { useNavigate, useSearch } from "@tanstack/react-router";
-import type { DaisyUIThemeSearchParmsTypesVariables, GenericThemeState } from "./types";
-import { useState } from "react";
+
+import type { DaisyUIThemeSearchParmsTypesVariables } from "./types";
 import {
   getColorValueFromTheme,
   getThemeVariable,
@@ -45,10 +44,10 @@ export function loadColorScheme() {
 function loadFromSearchParamsIfLocked(
   css_variable:DaisyUIThemeSearchParmsTypesVariables,
   theme?: {
-  name: string;
-  value: string;
-  variable: string;
-  locked?: boolean | undefined;
+  name?: string;
+  value?: string;
+  variable?: string;
+  locked?: boolean
 }) {
   if (!theme) return getColorValueFromTheme(css_variable);
   const { value, variable, locked } = theme;
@@ -311,10 +310,9 @@ export function importThemes(imported_text: string) {
           if (newThemeValue.startsWith("#")) {
             newThemeValue = hexToOklch(newThemeValue);
           }
-
+          // @ts-expect-error
           imported_theme[theme_key] = {
             ...oldThemeObject,
-            // @ts-expect-error
             value: newThemeValue,
           };
         }
