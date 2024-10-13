@@ -16,14 +16,13 @@ import { defaultThemes } from "@/components/all-in-one-theme-editor/utils/theme-
 import { useDaisyUITheme } from "@/components/all-in-one-theme-editor/utils/use-search-params-theme";
 import { daisyUIThemeSearchParamsSchema } from "@/components/all-in-one-theme-editor/utils/schema";
 import {
-  ExportThemeDaisyUiDrawer,
-  ImportThemeDaisyUiDrawer,
   MainDaisyUiDrawer,
 } from "@/components/navigation/DaisyUiDrawers";
 import { hideSplashScreen } from "vite-plugin-splash-screen/runtime";
 import { Intro } from "./-components/Intro";
 import { DrawerIds } from "./-components/type";
-import { DaisyUiDevtools } from "@/components/navigation/DaisyUiDevtools";
+import { DaisyUiDevtools } from "@/components/all-in-one-theme-editor/DaisyUiDevtools";
+import { ExportThemeDaisyUiDrawer, ImportThemeDaisyUiDrawer } from "@/components/all-in-one-theme-editor/ThemeDrawers";
 
 
 
